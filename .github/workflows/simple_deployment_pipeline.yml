@@ -33,3 +33,6 @@ jobs:
           heroku_app_name: "fullstack2020-pokedex-jp" #Must be unique in Heroku
           heroku_email: "j-p.parkkari@iki.fi"
           healthcheck: "https://fullstack2020-pokedex-jp.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
