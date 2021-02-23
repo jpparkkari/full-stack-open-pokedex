@@ -14,11 +14,19 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+        #{context.event.commits[0].message} == "11.17 testing"
+        #context.event.head_commit.message
       - name: commits
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
+        #[{message}]
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+        #["11.17 testing"]
+      - name: head commit
+        env:
+          HEAD_COMMIT: ${{ toJson(gihub.event.head_commit) }}
+        run: echo "$HEAD_COMMIT"
