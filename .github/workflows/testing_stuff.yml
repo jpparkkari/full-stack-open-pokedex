@@ -31,3 +31,4 @@ jobs:
         env:
           HEAD_COMMIT_MESSAGE: ${{ toJson(github.event.head_commit.message) }}
         run: echo "$HEAD_COMMIT_MESSAGE"
+        #print if there's #skip
