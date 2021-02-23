@@ -28,5 +28,5 @@ jobs:
         #["11.17 testing"]
       - name: head commit
         env:
-          HEAD_COMMIT: ${{ toJson(gihub.event.head_commit) }}
+          HEAD_COMMIT: ${{ toJson(github.event.head_commit) }}
         run: echo "$HEAD_COMMIT"
