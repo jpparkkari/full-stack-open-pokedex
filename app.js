@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 
 app.get('/health', (req, res) => {
   //res.send('ok')
-  res.status(400).json({error: 'testing error for healthcheck'})
+  res.status(400).json({ error: 'testing error for healthcheck' })
 })
 
 app.get('/version', (req, res) => {
