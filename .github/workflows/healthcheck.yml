@@ -1,13 +1,10 @@
 name: healthcheck
 
 on:
-  #schedule:
+  schedule:
     # * is a special character in YAML so you have to quote this string
-  #  - cron:  '*/15 * * * *'
-  push:
-    branches:
-      - master
-
+    - cron:  '*/15 * * * *'
+  
 jobs:
   healthcheck:
     runs-on: ubuntu-18.04
@@ -16,10 +13,18 @@ jobs:
         uses: jtalk/url-health-check-action@v1.4
         with:
           # Check the following URLs one by one sequentially
-          url: https://fullstack2020-pokedex-jp.herokuapp.com/version
+          url: https://fullstack2020-pokedex-jp.herokuapp.com/health
           # Follow redirects, or just report success on 3xx status codes
           follow-redirect: no # Optional, defaults to "no"
           # Fail this action after this many failed attempts
           max-attempts: 3 # Optional, defaults to 1
           # Delay between retries
           retry-delay: 5s # Optional, only applicable to max-attempts > 1
+      - name: slack message for failure
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: ${{ failure() }} 
