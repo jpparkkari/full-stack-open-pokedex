@@ -37,10 +37,10 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstack2020-pokedex-jp" #Must be unique in Heroku
           heroku_email: "j-p.parkkari@iki.fi"
-          #healthcheck: "https://fullstack2020-pokedex-jp.herokuapp.com/health"
+          healthcheck: "https://fullstack2020-pokedex-jp.herokuapp.com/health"
           #checkstring: "ok"
           delay: 2
-          #rollbackonhealthcheckfailed: true
+          rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: github.event_name == 'push' && contains(github.event.head_commit.message, '#skip') == false
